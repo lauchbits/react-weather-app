@@ -13,6 +13,14 @@ function App() {
 
 
   function fetchGeoData(){
+    
+  }
+
+  function fetchWeatherStatus(){
+    
+  }
+
+  useEffect(() => {
     fetch(`https://api.opencagedata.com/geocode/v1/json?q=${city}&key=210977eea4964620bffc3475a39b45ed`)
     .then(response => response.json())
     .then((usefulData) => {
@@ -23,9 +31,9 @@ function App() {
     .catch((e) => {
       console.error(`Error: ${e}`)
     })
-  }
+  }, [city])
 
-  function fetchWeatherStatus(){
+  useEffect(() => {
     fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,relativehumidity_2m,rain`)
     .then(response => response.json())
     .then((usefulData) => {
@@ -36,14 +44,6 @@ function App() {
     .catch((e) => {
       console.error(`Error: ${e}`)
     })
-  }
-
-  useEffect(() => {
-    fetchGeoData()
-  }, [city])
-
-  useEffect(() => {
-    fetchWeatherStatus()
   }, [long])
 
   function handleChangeInput(event){
