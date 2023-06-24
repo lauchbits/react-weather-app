@@ -4,7 +4,7 @@ import './CustomTooltip.css'
 function CustomTooltip({ payload, label, active }) {
 
     if (label){
-        if (label[0]=='0' && label[1]!='0'){
+        if (label[0]==='0' && label[1]!=='0'){
             label = label.slice(1)
         }
     }
