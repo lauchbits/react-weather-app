@@ -13,7 +13,7 @@ function App() {
 
 
   function fetchGeoData(){
-    fetch(`https://api.opencagedata.com/geocode/v1/json?q=${city}&key=210977eea4964620bffc3475a39b45ed`)
+    fetch(`https://api.opencagedata.com/geocode/v1/json?q=${city}&key=3e8468d856d740c283b0bb79e0fdc46e`)
     .then(response => response.json())
     .then((usefulData) => {
       console.log("Geo Data Fetched")
