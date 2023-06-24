@@ -40,11 +40,11 @@ function App() {
 
   useEffect(() => {
     fetchGeoData()
-  }, [city, fetchGeoData])
+  }, [city])
 
   useEffect(() => {
     fetchWeatherStatus()
-  }, [long, fetchWeatherStatus])
+  }, [long])
 
   function handleChangeInput(event){
     setCityInput(event.target.value)
