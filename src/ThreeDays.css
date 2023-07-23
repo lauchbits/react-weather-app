@@ -1,0 +1,24 @@
+table, td {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.2em;
+}
+
+td, th{
+    text-align: left;
+}
+
+.firsttd {
+    padding-right: 150px;
+}
+
+.secondtd{
+    padding-right: 10px;
+}
+
+.ThreeDayChart {
+    text-align: center;
+    width: 50%;
+    height: 200px;
+    display: inline-block;
+}

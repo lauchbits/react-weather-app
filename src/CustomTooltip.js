@@ -12,7 +12,7 @@ function CustomTooltip({ payload, label, active }) {
     if (active) {
       return (
         <div className="custom-tooltip">
-          <p className="time">{`${label} Uhr`}</p>
+          <p className="time">{`${label}`}</p>
           <p className="temp">{`${payload[0].value}°C`}</p>
         </div>
       );

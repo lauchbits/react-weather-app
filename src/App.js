@@ -1,5 +1,6 @@
 import './App.css';
 import WeatherToday from './WeatherToday.js';
+import ThreeDays from './ThreeDays.js';
 import { useState, useEffect } from "react";
 
 function App() {
@@ -10,18 +11,12 @@ function App() {
   const [city, setCity] = useState("Graz")
   const [lat, setLat] = useState(47.07)
   const [long, setLong] = useState(15.43)
+  const [currentTemp, setCurrentTemp] = useState("")
+  const [threeDayClicked, setThreeDayClicked] = useState(false)
 
 
   function fetchGeoData(){
-    
-  }
-
-  function fetchWeatherStatus(){
-    
-  }
-
-  useEffect(() => {
-    fetch(`https://api.opencagedata.com/geocode/v1/json?q=${city}&key=3e8468d856d740c283b0bb79e0fdc46e`)
+    fetch(`https://api.opencagedata.com/geocode/v1/json?q=${city}&key=210977eea4964620bffc3475a39b45ed`)
     .then(response => response.json())
     .then((usefulData) => {
       console.log("Geo Data Fetched")
@@ -29,21 +24,33 @@ function App() {
       setLong(usefulData.results[0].geometry.lng.toFixed(2))
     })
     .catch((e) => {
-      console.error(`Error: ${e}`)
+      console.error(`Geo Data Error: ${e}`)
     })
-  }, [city])
+  }
 
-  useEffect(() => {
+  function fetchWeatherStatus(){
     fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,relativehumidity_2m,rain`)
     .then(response => response.json())
     .then((usefulData) => {
       console.log(`Weather Data Fetched - ${city}`)
       setData(usefulData)
+
+      let currentHour = new Date().getHours()
+      setCurrentTemp(data.hourly.temperature_2m[currentHour])
+
       setLoading(false)
     })
     .catch((e) => {
-      console.error(`Error: ${e}`)
+      console.error(`Weather Fetching Error: ${e}`)
     })
+  }
+
+  useEffect(() => {
+    fetchGeoData()
+  }, [city])
+
+  useEffect(() => {
+    fetchWeatherStatus()
   }, [long])
 
   function handleChangeInput(event){
@@ -51,16 +58,33 @@ function App() {
   }
   function handleKeyDownInput(event){
     if (event.key === 'Enter'){
+      console.log(cityInput)
       setCity(cityInput)
     }
-  }    
+  }
+  function handleThreeDayClicked(event){
+    setThreeDayClicked(!threeDayClicked)
+  }
 
   return (
     <div className="App">
-      <p>Choose City or Region</p>
-      <input type='text' value={cityInput} onChange={handleChangeInput} onKeyDown={handleKeyDownInput}></input>
+      <input className='cityInput' type='text' value={cityInput} onChange={handleChangeInput} onKeyDown={handleKeyDownInput}></input>
+
+      <div className='TempNow'>
+        {loading && <p>Loading...</p>}
+        {!loading && currentTemp}°C
+        
+      </div>
+
+      <div className='ThreeDays' onClick={handleThreeDayClicked}>
+        <p className='header'>3 Tage-Vorhersage</p>
+        {loading && <p>Loading...</p>}
+        {!loading && <ThreeDays data={data} clicked={threeDayClicked}/>}
+      </div>
+      
+
       <div className='WeatherToday'>
-        <h1>Today's temperature in {city}</h1>
+        <p className='header'>24 Stunden-Vorhersage</p>
         {loading && <p>Loading...</p>}
         {!loading && <WeatherToday data={data} />}  
       </div>

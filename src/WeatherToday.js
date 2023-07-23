@@ -10,7 +10,7 @@ function WeatherToday(props) {
 
     const day_data = hourly_time.reduce((acc, time, index) => {
         if (time.includes(day)) {
-            let obj = {"time": time.substring(11, 16),
+            let obj = {"time": time.substring(11, 16) + " Uhr",
                     "temperature": hourly_temperature[index]}
             acc.push(obj)
         }
@@ -19,7 +19,7 @@ function WeatherToday(props) {
     
     return(
         <div className='Today'>
-            <Chart data={day_data}/>
+            <Chart data={day_data} grid={true}/>
         </div>
     )
 }
