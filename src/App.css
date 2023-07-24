@@ -1,8 +1,7 @@
 body{
   height: 100vh;
-  background: rgb(23,14,177);
-  background: linear-gradient(0deg, rgba(23,14,177,1) 0%, rgba(3,133,203,1) 55%, rgba(0,212,255,1) 100%);
-
+  background: rgb(2,1,40);
+  background: linear-gradient(0deg, rgba(2,1,40,1) -100%, rgba(8,7,117,1) -36%, rgba(23,14,177,1) 0%, rgba(3,133,203,1) 55%, rgba(0,212,255,1) 100%);
   color: white;
 }
 

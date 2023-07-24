@@ -8,15 +8,19 @@ function ThreeDays(props) {
 
     const weekday = ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"]
     const d = new Date()
-    const days = [weekday[d.getDay()], weekday[d.getDay() + 1], weekday[d.getDay() + 2]]
+    const days = [weekday[d.getDay()], weekday[d.getDay() + 1], weekday[d.getDay() + 2], weekday[d.getDay() + 3], weekday[d.getDay() + 4]]
+    const previewAmount = [0, 0, 0]
 
     //find max and avg
-    let avg = [0, 0, 0]
+    let avg = [0, 0, 0, 0, 0]
     let max = [{"time" : 0, "temp" : 0},
                 {"time" : 0, "temp" : 0},
-                {"time" : 0, "temp" : 0},]
+                {"time" : 0, "temp" : 0},
+                {"time" : 0, "temp" : 0},
+                {"time" : 0, "temp" : 0}]
 
-    for(let j = 0; j < 3; j++){
+
+    for(let j = 0; j < 5; j++){
         for(let i = 0 + (j * 24); i < 24  + (j * 24); i++){
             avg[j] += hourly_temperature[i]
             if (hourly_temperature[i] > max[j].temp){
@@ -26,6 +30,8 @@ function ThreeDays(props) {
         }
         avg[j] = (avg[j] / 24).toFixed(1)
     }
+    
+
     if(!clicked){
         return(
             <div>
@@ -35,7 +41,7 @@ function ThreeDays(props) {
                         <th>Avg</th>
                         <th>Max</th>
                         </tr>
-                    {days.map((idk, index) => (
+                    {previewAmount.map((idk, index) => (
                         <tr>
                         <td className='firsttd'>{days[index]}</td>
                         <td className='secondtd'>{avg[index]}°</td>
@@ -48,15 +54,24 @@ function ThreeDays(props) {
     }
     else{
         let data = []
-        for(let i = 0; i < 3; i++){
-            let obj = {"time": days[i],
-                    "temperature": parseFloat(avg[i])}
+        for(let i = 0; i < 5; i++){
+            let nextDay = new Date()
+            nextDay.setDate(d.getDate() + i)
+
+            let day = nextDay.getDate()
+            let month = nextDay.getMonth()
+
+            let format1 = day + "." + month + "."
+
+            let obj = {"time": format1,
+                    "temperature": parseFloat(avg[i]),
+                    "max_temperature": parseFloat(max[i].temp)}
             data.push(obj)
         }
 
         return(
             <div className='ThreeDayChart'>
-                <Chart data={data} grid={false}></Chart>
+                <Chart data={data} grid={false} max_temp={true} ></Chart>
             </div>
         )
     }

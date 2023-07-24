@@ -4,7 +4,6 @@ import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tool
 
 function Chart(props)  {
 
-  console.log(props.data)
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart
@@ -18,13 +17,21 @@ function Chart(props)  {
       >
         {props.grid && <CartesianGrid stroke="#ccc" />}
         <XAxis dataKey="time" />
-        
-        <Tooltip wrapperStyle={{ backgroundColor: '#ccc' }} content={<CustomTooltip />} />
+
+        <Tooltip wrapperStyle={{ backgroundColor: '#ccc' }} content={<CustomTooltip max_temp={props.max_temp}/>} />
         <Line 
           type="monotone" 
           dataKey="temperature" 
           stroke="yellow" 
           strokeWidth={3}
+          activeDot={{ r: 8 }}/>
+        
+        <Line 
+          type="monotone" 
+          dataKey="max_temperature" 
+          stroke="red" 
+          strokeWidth={3}
+          dot={{ stroke: 'red',  r: 4,}}
           activeDot={{ r: 8 }}/>
       </LineChart>
     </ResponsiveContainer>

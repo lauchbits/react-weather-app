@@ -1,7 +1,7 @@
 import React from 'react';
 import './CustomTooltip.css'
 
-function CustomTooltip({ payload, label, active }) {
+function CustomTooltip({ payload, label, active, max_temp }) {
 
     if (label){
         if (label[0]==='0' && label[1]!=='0'){
@@ -13,7 +13,8 @@ function CustomTooltip({ payload, label, active }) {
       return (
         <div className="custom-tooltip">
           <p className="time">{`${label}`}</p>
-          <p className="temp">{`${payload[0].value}°C`}</p>
+          {max_temp && <p>{`Max: ${payload[1].value}°C`}</p>}
+          <p className="temp">{`Avg: ${payload[0].value}°C`}</p>
         </div>
       );
     }

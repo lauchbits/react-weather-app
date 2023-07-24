@@ -34,15 +34,18 @@ function App() {
     .then((usefulData) => {
       console.log(`Weather Data Fetched - ${city}`)
       setData(usefulData)
-
-      let currentHour = new Date().getHours()
-      setCurrentTemp(data.hourly.temperature_2m[currentHour])
-
-      setLoading(false)
     })
     .catch((e) => {
       console.error(`Weather Fetching Error: ${e}`)
     })
+  }
+
+  function setTemp(){
+    let currentHour = new Date().getHours()
+    if(data){
+      setCurrentTemp(data.hourly.temperature_2m[currentHour])
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -52,6 +55,10 @@ function App() {
   useEffect(() => {
     fetchWeatherStatus()
   }, [long])
+
+  useEffect(() => {
+    setTemp()
+  }, [data])
 
   function handleChangeInput(event){
     setCityInput(event.target.value)
@@ -73,11 +80,10 @@ function App() {
       <div className='TempNow'>
         {loading && <p>Loading...</p>}
         {!loading && currentTemp}°C
-        
       </div>
 
       <div className='ThreeDays' onClick={handleThreeDayClicked}>
-        <p className='header'>3 Tage-Vorhersage</p>
+        <p className='header'>5 Tage-Vorhersage</p>
         {loading && <p>Loading...</p>}
         {!loading && <ThreeDays data={data} clicked={threeDayClicked}/>}
       </div>
