@@ -52,3 +52,12 @@ div {
   margin-left: auto;
   margin-right: auto;
 }
+
+@media (orientation: portrait){
+  .ThreeDays{
+    width: 70%;
+  }
+  .WeatherToday{
+    width: 70%;
+  }
+}

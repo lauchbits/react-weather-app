@@ -22,3 +22,12 @@ td, th{
     height: 200px;
     display: inline-block;
 }
+
+@media (orientation: portrait){
+    .firsttd {
+        padding-right: 50px;
+    }
+    .ThreeDayChart {
+        width: 80%;
+    }
+}
