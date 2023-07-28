@@ -16,7 +16,7 @@ function Chart(props)  {
         }}
       >
         {props.grid && <CartesianGrid stroke="#ccc" />}
-        <XAxis dataKey="time" />
+        <XAxis dataKey="time" stroke='white' />
 
         <Tooltip wrapperStyle={{ backgroundColor: '#ccc' }} content={<CustomTooltip max_temp={props.max_temp}/>} />
         <Line 
