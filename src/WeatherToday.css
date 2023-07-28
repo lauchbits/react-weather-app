@@ -4,3 +4,9 @@
     height: 400px;
     display: inline-block;
 }
+
+@media (orientation: portrait){
+    .Today {
+        height: 300px;
+    }   
+}

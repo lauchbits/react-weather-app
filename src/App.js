@@ -79,11 +79,11 @@ function App() {
 
       <div className='TempNow'>
         {loading && <p>Loading...</p>}
-        {!loading && currentTemp}°C
+        {!loading && currentTemp + "°C"}
       </div>
 
       <div className='ThreeDays' onClick={handleThreeDayClicked}>
-        <p className='header'>5 Tage-Vorhersage</p>
+        <p className='header fiveDayHeader'>5 Tage-Vorhersage</p>
         {loading && <p>Loading...</p>}
         {!loading && <ThreeDays data={data} clicked={threeDayClicked}/>}
       </div>

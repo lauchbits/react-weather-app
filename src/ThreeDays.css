@@ -25,9 +25,12 @@ td, th{
 
 @media (orientation: portrait){
     .firsttd {
-        padding-right: 50px;
+        padding-right: 45px;
     }
     .ThreeDayChart {
         width: 80%;
+    }
+    table, td {
+        font-size: 1em;
     }
 }

@@ -7,10 +7,13 @@ function ThreeDays(props) {
     const hourly_temperature = props.data.hourly.temperature_2m
 
     const weekday = ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"]
-    const d = new Date()
-    const days = [weekday[d.getDay()], weekday[d.getDay() + 1], weekday[d.getDay() + 2], weekday[d.getDay() + 3], weekday[d.getDay() + 4]]
+    const days = []
     const previewAmount = [0, 0, 0]
-
+    const d = new Date()
+    for(let i = 0; i < 5; i++){
+        days.push(weekday[(d.getDay() + i) % 7])
+    }
+    
     //find max and avg
     let avg = [0, 0, 0, 0, 0]
     let max = [{"time" : 0, "temp" : 0},
